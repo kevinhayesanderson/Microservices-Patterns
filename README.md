@@ -10,7 +10,7 @@ Modular Monolithic:
 
 Microservices:
 	
-Serverless	
+Serverless:	
 	Nanoservices
 	
 Problem->Learn->Design->Adapt->Evaluate->
