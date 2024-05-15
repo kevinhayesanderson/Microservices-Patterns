@@ -1,16 +1,108 @@
 Microservices Paterns:
-  "Evolving from Monolithic to Event-driven Microservices Architecture with designing High Scalable and High Available system"
+    "Evolving from Monolithic to Event-driven Microservices Architecture with designing Scalable and High Available system"
 
 Monolithic:
-  Tight Coupled
-  Interconnected code
+    Developing complete application as a single unit
+    single codebase
+    single big deployment
+    Tight Coupled
+    Interconnected code
+    Advantage:
+        Easy to get start and debug
+    Disadvantage:
+        Difficult to manage
+        Hard to implement new features
+    When to use:
+        Small application
+        Scale vertically (scale up) is fast:
+            With vertical scaling, also known as “scaling up” or “scaling down,” you add or subtract power to an existing cloud server upgrading memory (RAM), storage or processing power (CPU). 
+        Simple application with predictable scale and complexity
+        PoC and Quick Launch
+    Challenges:
+        Becomes complex over time - hard to understand
+        Hard to make new change, becoz of tight coupling
+        Small change requires full deployment of entire app
+        Barrier to new technology adoption
+        Difficult to scale:
+            can't scale components independently, can only scale the whole application
+    Design Principles:
+        DRY:
+            Don't Repeat Yourself
+        KISS:
+            Keep it Simple, Stupid
+        YAGNI:
+            You Ain't Gonna Need It
+            
+    Clean Architecture:
+        The layers of Clean Architecture are: 
+            Domain Layer:
+                the Domain Layer contains the core entities and business rules
+            Application Layer:
+                the Application Layer handles business logic
+            Presentation Layer:
+                The Presentation Layer handles user interface and user interactions
+            Infrastructure Layer:
+                Infrastructure Layer contains the low-level technical details such as databases, APIs, and external services.
 
 Modular Monolithic:
-  Macroservices
+    Macroservices:
 
 Microservices:
 
 Serverless:
-  Nanoservices
+    Nanoservices
 
 Problem->Learn->Design->Adapt->Evaluate->:
+
+Decisions:
+    - Design your system with focusing on context and non-functional requirements (-ilities).
+    - Design decision must be justified by a business requirement.
+    - Grow applications with metrics
+    
+How to understand domain:
+    - Gather funtional requirements
+    - Convert functional requirements to use cases(User Stories):
+        - eg: As a user I want to list products
+    - Gather Non-Functional requirements
+        - Scalability (Major)
+        - Availability (Major)
+        - Reliability
+        - Maintability
+        - Usability
+        - Eficiency
+
+For Usability and Eficiency:
+    Request per Second and Acceptable Latency:
+    Concurrent Users    Requests/Second     Latency(Excepted):
+    2k                  500                
+    20k                 12k                 
+    100k                80k                 <=2 sec
+    500k                300k                ?
+ 
+ S.O.L.I.D:
+    Single responsibility
+    Open-Closed Principle
+    Liskov's Substitution Principle
+    Interface Segregation
+    Dependency Inversion
+    
+Monolithic Problems:
+
+    Problem: Code Become too complex over time
+    Solution: N-Layer Architecture
+        horizontal logical layers
+        separation of concerns
+        layers of isolation
+    N-FR: Maintability
+
+    Problem: Highly Coupling Dependant layers
+    Solution: Clean Architecture & Dependency Rule
+    N-FR: Flexibility, Testability
+
+    Problem: Increased Traffic, Handle more Request
+    Solution: Vertical and Horizontal scaling & Load balancer
+    N-FR: Scalability
+    
+Modular Monolithic Problems:
+    Problem: Scale and deploy modules independently
+    Solution: Microservices Architecture
