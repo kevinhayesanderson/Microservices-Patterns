@@ -48,7 +48,85 @@ Modular Monolithic:
     Macroservices:
 
 Microservices:
-
+    small, independent and loosely coupled services
+    technology agnostic
+    each services has it's own database
+    bounded context
+    Challenges:
+        complexity, each service is simple, but the entire system is complex
+        network problems and latency : fault tolerance
+        development and testing integration and end to end testing the processes
+        data integrity
+            eventual consistency where possible
+        deployment initially
+        Logging & Monitoring
+        Debugging
+    When to Use:
+        independently deploy and zero downtime
+        independently scale
+        data partitioning
+    When not to use:
+        Antipatern:
+            Shared database
+            Don't do distributed monolith
+            Don't do Microservices without DevOps or Cloud services
+        Limited team size    
+        Brand new products
+            Stablize domain model
+    Design Patern:
+        Database per service pattern:
+            polygot persistence: different type of database
+    Main Considerations:
+        Decomposition - breaking down services
+        Communication between services
+        Data management
+        
+        Transaction Management
+        Deployments
+        Resilience
+    Decomposition - breaking down services:
+        Microservices Decomposition Patterns:
+            Domain Analysis -> Bounded Contexts -> Decompose Strategies -> Identify Microservices Boundaries
+            Decompose services by Scalability requirements:
+                Scale Cube:
+                    x-axis - horizontal duplication - scale by Cloning - scale out - monolith
+                    y-axis - funtional decomposition - scale by Splitting small services - Microservices
+                    z-axis - data partitioning - scale by splitting data
+        1. Decompose by business capability pattern:
+            services must be cohesive
+            services must br loosely coupled
+        2. Decompose by Subdomain:
+            DDD Subdomains
+            Bounded Context Pattern: (Domain-Driven Design)
+                2 Phases:
+                    Strategic
+                    Tactical
+                Strategic DDD:
+                    models defined by business rules and have context map between them
+                Tactical DDD:
+                    focuses on implmentation
+                Concepts:
+                    entity, aggregate, value object, repository, domain service
+                bounded Context - logical Boundaries - self consistent and independent
+            Context Mapping pattern:
+                Context map is a way to define logical boundaries between domains
+            Bounded Context can have more than one Microservices:
+            Domain Analysis:
+                1.Nouns and Verbs in user stories
+                2.construct Object interaction and responsibility diagram - domain diagrams - mostly reveal bounded Context
+                3.identity Synchronous and Asynchronous usecase
+                4.Identify and Decompose Microservices
+                    Types:
+                        Main Microservices - exposed to clients - mostly sync communications
+                        Transactional Microservices - mostly Async Communications
+                        Inteligence Microservices
+                
+        Checklist:
+            1. Microservices should do one-thing
+            2. Microservices size should not ne too big and not too Small
+            3. Chatty Communications - Combine services
+            4. No Locking Dependencies - inter-service Dependencies > 2 or 3 - required to deploy together - redesign
+            5. Should be possible deploy a single service without re-deploy another services
 Serverless:
     Nanoservices
 
@@ -106,3 +184,16 @@ Monolithic Problems:
 Modular Monolithic Problems:
     Problem: Scale and deploy modules independently
     Solution: Microservices Architecture
+
+Microservices Problems:
+    Problem: Direct Client-to-Service Communication
+    Solution: Microservices Communication Patterns(API Gateway, BFF(Backend for Front-End), Pub/Sub...etc)
+    
+    Problem: Multiple Request for Retrieve Relational Data(N+1)
+    Solution: GraphQL API - quering Structural Relational data
+    
+    Problem: inter-service Communication makes heavy load on network Traffic
+    Solution: gRPC APIs
+    
+    Problem: Real Time chat with Support agent
+    Solution: WebSocket APIs
