@@ -1,0 +1,168 @@
+Microservices Communications:
+	Smart endpoints and dumb pipes:
+	Types:
+		Synchronous Communications:
+			Request/Response
+		Asynchronous Communications:
+			Message broker event buses
+
+Synchronous Communications:
+	Request/Responses
+	1.REST HTTP(S) API: (for exposing microservices)
+		Public API: calls fropm client apps
+		Backend API: inter-service communication
+		"collection/item/collection"
+	2.gRPC API: (for internal communication between microservices)
+	3.GraphQL API: (querying flexible data in microservices)
+		query and manipulational language for APIs
+		evolve APIs without versions
+		Core Concepts:
+			Schema: describes all the possible data that client can query
+					made up of object types
+			Queries: GraphQL validate queries against the schema
+			Resolver: produces the value
+			Mutation: insert or update data
+			
+	4.WebSocket API: (real-time bi-directional communication)
+		Real-time web applications
+Asynchronous Communications:
+	client doesn't wait for response
+	AMQP(Advanced Message Queuing Protocol)
+	Message brokers: Kafka, RabbitMQ
+	producer doesn't wait foe the response
+	2 Types:
+		One to one - queue - command pattern
+		one to many - topic - pub/sub event bus or messaage broker
+		
+Communication Styles:
+	Request/Response: 
+		HTTP and REST Protocol
+		extends gRPC & GraphQL
+	Push and real-time communication:
+		HTTP and WebSocket Protocol
+	Pull communication:
+		HTTP and AMQP
+		short & long polling
+	Event Driven communication:
+		AMQP
+		Pub/Sub Model
+	Hybrid:
+	
+API Gateways:
+	single point of entry
+	routing
+	cross-cutting concerns:
+		authentication
+		authorization
+		Protocol translations
+		rate limiting
+		logging
+		monitoring
+		Load balancing
+	Patterns:
+		Gateway Routing Pattern
+		Gateway Aggregation pattern
+		Gateway Offloading Pattern
+		
+Gateway Routing Pattern:
+	route requests to multiple microservices
+	Application Layer 7 routing
+	
+Gateway Aggregation pattern:
+	aggregate multiple individual requests
+	removes chattiness
+	dispatches requests to several microservices and then aggregates the results
+	
+Gateway Offloading Pattern:
+	cross-cutting concerns in gateway
+	
+API Gateway Patterns:
+	it is distributed system reverse proxy or gateway routing for using in synchronous communication.
+	single-point-of-failure risk
+	as the business logic increases, the complexity of the API gateway increases - anti pattern
+	Best Practices: 
+		splitting the API Gateway in multiple services or smaller API Gateways: BFF
+	Request Flow:
+		1.Request Validation
+		2.IP allowlisting
+		3.Authetcation/Authorization
+		4.Rate Limiting
+		5.Service Discovery
+		6.Protocol Conversions
+BFF:
+    seperate API Gateways as Per frontend applications
+    eliminates single point of failure
+    
+Service to Service Communications:
+    Best Practice: Reduce inter service communication
+    
+    Problems:
+    Many internal service commnication
+    Chain Queries in Sync communication
+    Solution:
+    1.change communications to async way using message broker
+    2.use Service Aggregator pattern
+    
+Service Aggregator Pattern:
+    receives requests from API Gateway and initiates multiple requests to services
+    combines the results
+    
+Service Registry/Discovery Pattern:
+    why: service locations changes frequently due to auto scaling features
+    allows the gateway to find the IP of services
+    Patterns:
+       1.Client-side service discovery
+       2.Server-side Service discovery
+       
+    Kubernetes Container orchestrator automatically handles the service discovery operations
+    
+Asynchronous Message-Based Communications:  
+    Benefits:
+        New subscriber service
+        Scalability
+        Event-driven 
+        Retry Mechanisms
+    Challenges:
+        1.single-point-of-failure: 
+            Message brokers
+            Scale the message broker
+            use hybrid communications
+            
+        2.debugging: 
+            track the messages with unique id - correlation id
+            
+        3.At-least-once delivery and Not guarantee an order of messages:
+            must implement idempotencty consumers
+            not designing FIFO requires cases
+        
+    Type:
+        Point-to-Point Model:
+            one to one 
+            single producer and single consumer
+            queue
+            command pattern
+            eg: RabbitMQ
+        Pub/Sub model, one to many
+            one to many (topic)
+            one publisher and many subscribers
+            async
+            event bus
+            message broker
+            eg: Kaska, RabbitMQ
+            Event-driven Architecture:
+                CQRS pattern
+                event stroming
+                eventual consistency
+                
+Fan-Out & Message Filtering with Pub/Sub pattern:
+    topic
+    message filtering policy
+    
+    
+Topic-Queue Chaining & Loading balancing pattern:
+    using a queue that acts as abuffer between the services to avoid loss data if the services fail
+    queue between the service bus and service to have the events and commands stored,
+        if the service fails, the message is stored, when it up, it can process the messages
+    also queue acts as a buffering load balancer    
+
+

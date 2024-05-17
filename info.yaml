@@ -197,3 +197,17 @@ Microservices Problems:
     
     Problem: Real Time chat with Support agent
     Solution: WebSocket APIs
+    
+    Problem: Client Apps has different UI requirements
+    Solution:Client Focused Interfaces: BFF(Backend for Frontend Pattern)
+    
+    Problem: Service-to-Service Communications Chain Queries
+    Solution: Aggregate Query operations: Service Aggregator Pattern
+    
+    Problem: Long running operations in Sync operations
+    Solution: Async way of communications
+    
+    Problem: Databases Bottlenecks when scaling
+    Solution: Scale stateful applications horizontal scaling
+              Service and Data Partitioning along Business Boundaries - Shards/Pods
+              Use NoSQL Database to gain easy partitioning features
