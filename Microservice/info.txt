@@ -1,0 +1,55 @@
+docker pull mongo
+
+docker run -d --name shopping-mongo -p 27017:27017 mongo
+
+docker exec -it shopping-mongo bash
+
+PM> Update-Package -ProjectName Catalog.API 
+
+
+docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml up -d
+docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml down
+
+docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml up --build -d
+
+docker ps -aq
+
+docker stop $(docker ps -aq)
+ 
+docker rm $(docker ps -aq)
+ 
+docker images -q
+ 
+docker rmi $(docker images -q)
+ 
+docker system prune
+
+
+docker run -d -p 6379:6379 --name aspnetrun-redis redis
+
+docker logs -f aspnetrun-redis
+
+docker exec -it aspnetrun-redis /bin/bash
+
+PM> Install-Package Microsoft.Extensions.Caching.StackExchangeRedis
+PM> Update-Package -ProjectName Basket.API
+
+docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+https://localhost:9443/
+https://localhost:9443/#!/auth
+admin
+36yfke5CjWmNogx519xT
+
+PgAdmin:
+http://localhost:5050/browser/
+admin@aspnetrun.com
+admin1234
+
+DiscountServer
+discountdb
+admin
+admin1234
+
+MSSQL Server
+sa
+rTPjhRakQ1qBVLjc512
